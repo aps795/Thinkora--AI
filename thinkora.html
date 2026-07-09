@@ -61,6 +61,7 @@
         position: sticky;
         top: 0;
         z-index: 20;
+        -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
         background: color-mix(in srgb, var(--bg) 82%, transparent);
         border-bottom: 1px solid var(--border);
@@ -374,6 +375,12 @@
         font-size: 0.92rem;
       }
 
+      /* Utility classes (replace inline styles) */
+      .section-title--compact { margin-bottom: 10px; }
+      .section-title--spaced { margin-top: 14px; }
+      .mt-12 { margin-top: 12px; }
+      .p-muted { margin: 8px 0 0; color: var(--muted); }
+      .card-grid--single { grid-template-columns: 1fr; }
       footer {
         padding: 24px 0 40px;
         color: var(--muted);
@@ -450,9 +457,9 @@
             <div class="bubble user">Sure — like a plant making food from sunlight.</div>
             <div class="bubble ai">I can also create a quiz, notes, or flashcards for you.</div>
           </div>
-          <div class="mini-window" style="margin-top: 12px;">
+          <div class="mini-window mt-12">
             <strong>Built for students</strong>
-            <p style="margin: 8px 0 0; color: var(--muted);">
+            <p class="p-muted">
               NCERT help, assignments, math solutions, revision plans, and exam prep in one place.
             </p>
           </div>
@@ -503,7 +510,7 @@
 
       <section id="demo" class="demo">
         <div class="chat-panel">
-          <div class="section-title" style="margin-bottom: 10px;">
+          <div class="section-title section-title--compact">
             <h2>Try a quick demo</h2>
             <span class="pill">Live chat</span>
           </div>
@@ -518,7 +525,7 @@
 
         <div>
           <div class="history-panel">
-            <div class="section-title" style="margin-bottom: 10px;">
+              <div class="section-title section-title--compact">
               <h2>Recent study history</h2>
               <span class="pill">Saved locally</span>
             </div>
@@ -532,11 +539,11 @@
             <div class="upload-status" id="uploadStatus">Upload notes, PDFs, or study material for later review.</div>
           </div>
 
-          <div class="section-title" style="margin-top: 14px;">
+          <div class="section-title section-title--spaced">
             <h2>Planned future upgrades</h2>
             <span class="pill">Roadmap</span>
           </div>
-          <div class="card-grid" style="grid-template-columns: 1fr;">
+          <div class="card-grid card-grid--single">
             <article class="roadmap-card">
               <h3>Personalized study plans</h3>
               <p>Create custom revision paths based on a student’s pace, subjects, and weak areas.</p>
