@@ -45,6 +45,25 @@
     {"keywords": ["constitution adoption", "constitution india"], "answer": "The Constitution of India was adopted on 26 November 1949 and came into effect on 26 January 1950."},
     {"keywords": ["assembly elections", "general elections"], "answer": "India holds general (parliamentary) elections typically every five years to elect members of the Lok Sabha."},
     {"keywords": ["indian languages", "official languages"], "answer": "India recognizes Hindi in Devanagari script as the official language of the central government along with English for official purposes; the constitution lists 22 scheduled languages."},
-    {"keywords": ["national emblem", "ashoka"], "answer": "India's national emblem is adapted from the Lion Capital of Ashoka (Sarnath) and features four Asiatic lions."}
+    {"keywords": ["national emblem", "ashoka"], "answer": "India's national emblem is adapted from the Lion Capital of Ashoka (Sarnath) and features four Asiatic lions."},
+    {"keywords": ["president of india", "current president", "droupadi murmu"], "answer": "The current President of India is Droupadi Murmu, the 15th President, who assumed office in July 2022."},
+    {"keywords": ["vice president of india", "current vice president", "jagdeep dhankhar"], "answer": "The current Vice President of India is Jagdeep Dhankhar, the 14th Vice President."},
+    {"keywords": ["prime minister of india", "current prime minister", "narendra modi"], "answer": "The current Prime Minister of India is Narendra Modi, serving his third consecutive term as of 2026."},
+    {"keywords": ["chief justice of india", "cji", "surya kant"], "answer": "The Chief Justice of India is Justice Surya Kant, who became the 53rd CJI on November 24, 2025."},
+    {"keywords": ["lok sabha speaker", "speaker of lok sabha", "om birla"], "answer": "The Speaker of the Lok Sabha is Om Birla, serving during the 18th Lok Sabha."},
+    {"keywords": ["chief election commissioner", "cec", "rajiv kumar"], "answer": "The Chief Election Commissioner of India is Rajiv Kumar, the 25th CEC."},
+    {"keywords": ["rbi governor", "reserve bank governor", "shaktikanta das"], "answer": "The Governor of the Reserve Bank of India is Shaktikanta Das, the 25th Governor."},
+    {"keywords": ["nominal gdp india", "gdp value 2026", "6th largest global economy"], "answer": "India's nominal GDP is approximately $4.15 trillion in 2026, making it the 6th largest economy in the world."},
+    {"keywords": ["gdp ppp india", "ppp gdp india", "3rd largest global economy"], "answer": "India's GDP by purchasing power parity (PPP) is about $18.90 trillion in 2026, ranking it as the 3rd largest economy globally."},
+    {"keywords": ["gdp growth rate india", "economic growth india", "2026 growth"], "answer": "India's projected GDP growth rate for 2026 is between 6.4% and 6.6%, making it one of the fastest-growing major economies."},
+    {"keywords": ["financial year india", "indian fiscal year"], "answer": "India's financial year runs from April 1 to March 31."},
+    {"keywords": ["currency india", "indian rupee"], "answer": "The currency of India is the Indian Rupee, abbreviated INR and represented by the symbol ₹."},
+    {"keywords": ["capital new delhi", "india capital"], "answer": "The capital of India is New Delhi."},
+    {"keywords": ["total states india", "number of states"], "answer": "India has 28 states."},
+    {"keywords": ["union territories india", "ut count"], "answer": "India has 8 Union Territories."},
+    {"keywords": ["total area india", "area of india"], "answer": "India covers about 3.287 million square kilometers, making it the 7th largest country in the world by area."},
+    {"keywords": ["population india", "most populous country"], "answer": "India's population is over 1.43 billion, making it the most populous country globally."},
+    {"keywords": ["standard time india", "IST"], "answer": "India Standard Time (IST) is UTC+05:30."},
+    {"keywords": ["major river systems india", "ganga brahmaputra indus"], "answer": "Major river systems in India include the Ganga, Brahmaputra, Indus, Godavari, Krishna, and Narmada."}
   ]
 }
