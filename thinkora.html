@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thinkora AI — General + Study Assistant</title>
+    <meta
+      name="description"
+      content="Thinkora AI is a smart general and study assistant for students, with chat, notes, quizzes, voice support, PDF help, and more."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f7ff;
+        --surface: #ffffff;
+        --surface-2: #eef4ff;
+        --text: #14213d;
+        --muted: #5c6b8a;
+        --accent: #5b7cff;
+        --accent-2: #29c7b7;
+        --border: rgba(20, 33, 61, 0.1);
+        --shadow: 0 20px 45px rgba(24, 38, 74, 0.12);
+      }
+
+      body.dark {
+        color-scheme: dark;
+        --bg: #07111f;
+        --surface: #0f1b2d;
+        --surface-2: #17253c;
+        --text: #f2f7ff;
+        --muted: #9eb0c8;
+        --accent: #84a1ff;
+        --accent-2: #4ddfcb;
+        --border: rgba(255, 255, 255, 0.08);
+        --shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+        background: color-mix(in srgb, var(--bg) 82%, transparent);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 1.1rem;
+      }
+
+      .brand-badge {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        color: var(--muted);
+      }
+
+      .nav-btn {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        padding: 10px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 30px;
+        align-items: center;
+        padding: 58px 0 44px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 4.4vw, 3.4rem);
+        line-height: 1.08;
+        margin: 0 0 16px;
+        letter-spacing: -0.02em;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.04rem;
+        line-height: 1.7;
+        margin: 0 0 24px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: none;
+        border-radius: 999px;
+        padding: 12px 16px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 12px 14px;
+        min-width: 120px;
+        box-shadow: var(--shadow);
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+
+      .hero-card {
+        background: linear-gradient(135deg, rgba(91, 124, 255, 0.16), rgba(41, 199, 183, 0.16));
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .mini-window {
+        background: var(--surface);
+        border-radius: 18px;
+        padding: 16px;
+        border: 1px solid var(--border);
+      }
+
+      .bubble {
+        display: inline-block;
+        padding: 10px 12px;
+        border-radius: 999px;
+        margin: 6px 0;
+        font-size: 0.95rem;
+      }
+
+      .bubble.ai {
+        background: rgba(91, 124, 255, 0.14);
+      }
+
+      .bubble.user {
+        background: rgba(41, 199, 183, 0.16);
+        margin-left: 18px;
+      }
+
+      section {
+        padding: 18px 0 36px;
+      }
+
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: var(--surface-2);
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .feature-card,
+      .stack-card,
+      .roadmap-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .feature-card h3,
+      .stack-card h3,
+      .roadmap-card h3 {
+        margin: 0 0 8px;
+      }
+
+      .feature-card p,
+      .stack-card p,
+      .roadmap-card p {
+        color: var(--muted);
+        line-height: 1.65;
+        margin: 0;
+      }
+
+      .demo {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .chat-panel,
+      .history-panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .chat-log {
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .chat-bubble {
+        max-width: 82%;
+        padding: 10px 12px;
+        border-radius: 14px;
+        line-height: 1.5;
+      }
+
+      .chat-bubble.user {
+        align-self: flex-end;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+      }
+
+      .chat-bubble.bot {
+        align-self: flex-start;
+        background: var(--surface-2);
+      }
+
+      .composer {
+        display: flex;
+        gap: 10px;
+      }
+
+      .composer input {
+        flex: 1;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 12px 14px;
+        background: var(--surface-2);
+        color: var(--text);
+      }
+
+      .composer button {
+        border: none;
+        border-radius: 999px;
+        padding: 12px 14px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+        cursor: pointer;
+      }
+
+      .history-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .history-list li {
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: var(--surface-2);
+        color: var(--text);
+        line-height: 1.45;
+      }
+
+      .upload-box {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px dashed var(--border);
+        border-radius: 999px;
+        padding: 10px 12px;
+        cursor: pointer;
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .upload-box input {
+        display: none;
+      }
+
+      .upload-status {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      footer {
+        padding: 24px 0 40px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .demo,
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 36px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <a class="brand" href="#">
+          <span class="brand-badge">✦</span>
+          <span>Thinkora AI</span>
+        </a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#demo">Live Demo</a>
+          <button class="nav-btn" id="themeToggle" type="button">🌙 Dark Mode</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <span class="pill">General AI + Study Companion</span>
+          <h1>Ask anything. Learn smarter. Prepare better.</h1>
+          <p>
+            Thinkora AI blends a powerful general assistant with a student-focused study partner.
+            It can explain concepts, create notes, solve quizzes, answer NCERT-style questions,
+            summarize PDFs, and support voice-first learning.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#demo">Try the Demo</a>
+            <a class="btn btn-secondary" href="#features">Explore Features</a>
+          </div>
+          <div class="stats">
+            <div class="stat-card">
+              <strong>24/7</strong>
+              <span>AI help</span>
+            </div>
+            <div class="stat-card">
+              <strong>10+</strong>
+              <span>Smart tools</span>
+            </div>
+            <div class="stat-card">
+              <strong>Eng / Hin</strong>
+              <span>Multi-language</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="App preview">
+          <div class="mini-window">
+            <div class="bubble ai">Explain photosynthesis simply.</div>
+            <div class="bubble user">Sure — like a plant making food from sunlight.</div>
+            <div class="bubble ai">I can also create a quiz, notes, or flashcards for you.</div>
+          </div>
+          <div class="mini-window" style="margin-top: 12px;">
+            <strong>Built for students</strong>
+            <p style="margin: 8px 0 0; color: var(--muted);">
+              NCERT help, assignments, math solutions, revision plans, and exam prep in one place.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="section-title">
+          <h2>Core features</h2>
+          <span class="pill">General AI</span>
+        </div>
+        <div class="card-grid">
+          <article class="feature-card">
+            <h3>General AI</h3>
+            <p>Ask anything, explain concepts, summarize text, translate languages, write emails and essays, and solve programming issues.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Study Assistant</h3>
+            <p>Get NCERT-style answers, step-by-step topic explanations, notes, quizzes, MCQs, math help, and assignment support.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Smart Learning</h3>
+            <p>Build flashcards, switch into exam-prep mode, and learn with voice input, voice output, and image-based questions.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Smart features</h2>
+          <span class="pill">Voice + vision</span>
+        </div>
+        <div class="card-grid">
+          <article class="feature-card">
+            <h3>Voice input and output</h3>
+            <p>Speak naturally and hear answers back in a conversational way for hands-free studying.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Image-based questions</h3>
+            <p>Upload a photo and let the assistant help solve questions from the image or explain the scene.</p>
+          </article>
+          <article class="feature-card">
+            <h3>PDF upload and chat</h3>
+            <p>Summarize long documents, extract key points, and ask follow-up questions about uploaded PDFs.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="demo" class="demo">
+        <div class="chat-panel">
+          <div class="section-title" style="margin-bottom: 10px;">
+            <h2>Try a quick demo</h2>
+            <span class="pill">Live chat</span>
+          </div>
+          <div class="chat-log" id="chatLog">
+            <div class="chat-bubble bot">Hello! I can help with study questions, notes, summaries, and coding help. Ask me anything.</div>
+          </div>
+          <div class="composer">
+            <input id="chatInput" type="text" placeholder="Ask: explain Newton's laws or help with a quiz" />
+            <button id="sendBtn" type="button">Send</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="history-panel">
+            <div class="section-title" style="margin-bottom: 10px;">
+              <h2>Recent study history</h2>
+              <span class="pill">Saved locally</span>
+            </div>
+            <ul class="history-list" id="historyList">
+              <li>Start a chat and your recent study activity will appear here.</li>
+            </ul>
+            <label class="upload-box" for="uploadInput">
+              <input id="uploadInput" type="file" accept=".pdf,.txt,.doc,.docx" />
+              <span>📄 Upload a document</span>
+            </label>
+            <div class="upload-status" id="uploadStatus">Upload notes, PDFs, or study material for later review.</div>
+          </div>
+
+          <div class="section-title" style="margin-top: 14px;">
+            <h2>Planned future upgrades</h2>
+            <span class="pill">Roadmap</span>
+          </div>
+          <div class="card-grid" style="grid-template-columns: 1fr;">
+            <article class="roadmap-card">
+              <h3>Personalized study plans</h3>
+              <p>Create custom revision paths based on a student’s pace, subjects, and weak areas.</p>
+            </article>
+            <article class="roadmap-card">
+              <h3>AI tutor for every subject</h3>
+              <p>Offer subject-specific tutoring for math, science, English, coding, and more.</p>
+            </article>
+            <article class="roadmap-card">
+              <h3>Performance analytics</h3>
+              <p>Track quiz scores, revision consistency, and improvement areas with friendly dashboards.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Recommended tech stack</h2>
+          <span class="pill">Modern build</span>
+        </div>
+        <div class="card-grid">
+          <article class="stack-card">
+            <h3>Frontend</h3>
+            <p>React + Tailwind CSS for a smooth, responsive experience with a modern UI.</p>
+          </article>
+          <article class="stack-card">
+            <h3>Backend</h3>
+            <p>Python + FastAPI for fast APIs, AI integrations, and clean student-focused services.</p>
+          </article>
+          <article class="stack-card">
+            <h3>AI & data</h3>
+            <p>OpenAI GPT or Google Gemini, PostgreSQL, JWT/Firebase auth, and Cloudinary storage.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        Thinkora AI — built for curious minds, busy students, and AI-powered learning.
+      </div>
+    </footer>
+
+    <script>
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+
+      const savedTheme = localStorage.getItem('thinkora-theme');
+      if (savedTheme === 'dark') {
+        body.classList.add('dark');
+        themeToggle.textContent = '☀️ Light Mode';
+      }
+
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        const isDark = body.classList.contains('dark');
+        localStorage.setItem('thinkora-theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+      });
+
+      const chatLog = document.getElementById('chatLog');
+      const chatInput = document.getElementById('chatInput');
+      const sendBtn = document.getElementById('sendBtn');
+      const historyList = document.getElementById('historyList');
+      const uploadInput = document.getElementById('uploadInput');
+      const uploadStatus = document.getElementById('uploadStatus');
+
+      function addMessage(text, who) {
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${who}`;
+        bubble.textContent = text;
+        chatLog.appendChild(bubble);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      async function loadHistory() {
+        try {
+          const response = await fetch('/api/history');
+          if (!response.ok) throw new Error('history unavailable');
+          const data = await response.json();
+          const items = data.history || [];
+          historyList.innerHTML = '';
+          if (!items.length) {
+            historyList.innerHTML = '<li>Start a chat and your recent study activity will appear here.</li>';
+            return;
+          }
+          items.slice(-6).forEach((item) => {
+            const li = document.createElement('li');
+            li.textContent = `${item.role === 'assistant' ? 'AI' : item.role === 'upload' ? 'Upload' : 'You'}: ${item.message}`;
+            historyList.appendChild(li);
+          });
+        } catch (error) {
+          historyList.innerHTML = '<li>History is unavailable right now.</li>';
+        }
+      }
+
+      async function uploadDocument() {
+        const file = uploadInput.files[0];
+        if (!file) return;
+        uploadStatus.textContent = 'Uploading document...';
+        const formData = new FormData();
+        formData.append('file', file);
+        try {
+          const response = await fetch('/api/upload', { method: 'POST', body: formData });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'Upload failed');
+          uploadStatus.textContent = data.summary;
+          await loadHistory();
+        } catch (error) {
+          uploadStatus.textContent = 'Upload failed. Please try again.';
+        }
+      }
+
+      async function sendMessage() {
+        const value = chatInput.value.trim();
+        if (!value) return;
+
+        addMessage(value, 'user');
+        chatInput.value = '';
+
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble bot';
+        bubble.textContent = 'Thinking...';
+        chatLog.appendChild(bubble);
+        chatLog.scrollTop = chatLog.scrollHeight;
+
+        try {
+          const response = await fetch('/api/stream', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: value })
+          });
+
+          if (!response.ok) {
+            throw new Error('Backend unavailable');
+          }
+
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let text = '';
+
+          while (true) {
+            const { done, value: chunk } = await reader.read();
+            if (done) break;
+
+            const decoded = decoder.decode(chunk, { stream: true });
+            const lines = decoded.split('\n');
+
+            for (const line of lines) {
+              if (!line.startsWith('data: ')) continue;
+              const payload = line.slice(6).trim();
+              if (!payload || payload === '[DONE]') continue;
+              try {
+                const parsed = JSON.parse(payload);
+                if (parsed.text) {
+                  text += parsed.text;
+                  bubble.textContent = text;
+                  chatLog.scrollTop = chatLog.scrollHeight;
+                }
+              } catch (error) {
+                // ignore malformed stream chunk
+              }
+            }
+          }
+
+          if (!text.trim()) {
+            bubble.textContent = 'The assistant did not return any text.';
+          }
+          await loadHistory();
+        } catch (error) {
+          bubble.textContent = 'The smart backend is not running yet. Start it with python3 app.py.';
+        }
+      }
+
+      sendBtn.addEventListener('click', sendMessage);
+      uploadInput.addEventListener('change', uploadDocument);
+      chatInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          sendMessage();
+        }
+      });
+
+      loadHistory();
+    </script>
+  </body>
+</html>
