@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Environment
+.env
+
+# Generated files
+India_GS_GK_Database_2026.xlsx
+study_history.db
+
+# Uploads and user content
+uploads/
+
+# IDE files
+.vscode/
