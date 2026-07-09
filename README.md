@@ -75,22 +75,4 @@ PDF and document chat
 
 Speech-to-text and text-to-speech
 
-Suggested Names
-
-StudyGPT
-
-EduMind AI
-
-BrainMate AI
-
-LearnSphere AI
-
-IntelliTutor
-
-EduNova AI
-
-StudyBot AI
-
-APS AI (based on your initials)
-
 This project is strong for a BCA portfolio because it demonstrates AI integration, full-stack development, authentication, databases, and modern web technologies. It can also be expanded over time with new AI capabilities.
