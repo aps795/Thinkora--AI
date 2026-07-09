@@ -68,9 +68,11 @@ class SmartAssistant:
             return {"general_science": [], "indian_gk": []}
 
     def _lookup_knowledge(self, message: str) -> Optional[str]:
-        text = message.lower().strip()
+        self.knowledge = self._load_knowledge()
+        text = re.sub(r"[^a-z0-9]+", " ", message.lower()).strip()
         for item in self.knowledge.get("general_science", []) + self.knowledge.get("indian_gk", []):
-            if any(keyword in text for keyword in item.get("keywords", [])):
+            keywords = [str(keyword).lower().strip() for keyword in item.get("keywords", []) if str(keyword).strip()]
+            if any(keyword in text for keyword in keywords):
                 return item.get("answer")
         return None
 
