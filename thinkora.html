@@ -11,28 +11,36 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f4f7ff;
+        --bg: #f5f9ff;
         --surface: #ffffff;
-        --surface-2: #eef4ff;
-        --text: #14213d;
-        --muted: #5c6b8a;
-        --accent: #5b7cff;
-        --accent-2: #29c7b7;
-        --border: rgba(20, 33, 61, 0.1);
-        --shadow: 0 20px 45px rgba(24, 38, 74, 0.12);
+        --surface-2: #f0f5ff;
+        --text: #0f172a;
+        --text-secondary: #475569;
+        --muted: #64748b;
+        --accent: #4f46e5;
+        --accent-2: #06b6d4;
+        --accent-3: #8b5cf6;
+        --border: rgba(15, 23, 42, 0.08);
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.08);
+        --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.12);
       }
 
       body.dark {
         color-scheme: dark;
-        --bg: #07111f;
-        --surface: #0f1b2d;
-        --surface-2: #17253c;
-        --text: #f2f7ff;
-        --muted: #9eb0c8;
-        --accent: #84a1ff;
-        --accent-2: #4ddfcb;
-        --border: rgba(255, 255, 255, 0.08);
-        --shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        --bg: #0f172a;
+        --surface: #1a2847;
+        --surface-2: #233557;
+        --text: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --muted: #94a3b8;
+        --accent: #818cf8;
+        --accent-2: #22d3ee;
+        --accent-3: #c084fc;
+        --border: rgba(255, 255, 255, 0.1);
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.4);
       }
 
       * {
@@ -41,30 +49,35 @@
 
       body {
         margin: 0;
-        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         background: var(--bg);
         color: var(--text);
         transition: background 0.3s ease, color 0.3s ease;
+        line-height: 1.6;
       }
 
-      a  {
+      a {
         color: inherit;
         text-decoration: none;
       }
 
       .container {
-        width: min(1160px, calc(100% - 32px));
+        width: min(1280px, calc(100% - 32px));
         margin: 0 auto;
       }
 
       header {
         position: sticky;
         top: 0;
-        z-index: 20;
+        z-index: 50;
         -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
-        background: color-mix(in srgb, var(--bg) 82%, transparent);
+        background: rgba(245, 249, 255, 0.8);
         border-bottom: 1px solid var(--border);
+      }
+
+      body.dark header {
+        background: rgba(15, 23, 42, 0.8);
       }
 
       .nav {
@@ -77,65 +90,88 @@
       .brand {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         font-weight: 800;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        letter-spacing: -0.5px;
       }
 
       .brand-badge {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         display: grid;
         place-items: center;
         border-radius: 12px;
         background: linear-gradient(135deg, var(--accent), var(--accent-2));
         color: white;
-        box-shadow: var(--shadow);
+        font-size: 1.4rem;
+        box-shadow: var(--shadow-lg);
       }
 
       .nav-links {
         display: flex;
-        gap: 18px;
+        gap: 32px;
         align-items: center;
         color: var(--muted);
+        font-weight: 500;
+      }
+
+      .nav-links a {
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
       }
 
       .nav-btn {
         border: 1px solid var(--border);
         background: var(--surface);
         color: var(--text);
-        padding: 10px 14px;
-        border-radius: 999px;
+        padding: 10px 16px;
+        border-radius: 20px;
         cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .nav-btn:hover {
+        background: var(--surface-2);
+        border-color: var(--accent);
       }
 
       .hero {
         display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 30px;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 48px;
         align-items: center;
-        padding: 58px 0 44px;
+        padding: 80px 0 60px;
       }
 
       .hero h1 {
-        font-size: clamp(2rem, 4.4vw, 3.4rem);
-        line-height: 1.08;
-        margin: 0 0 16px;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        line-height: 1.1;
+        margin: 0 0 20px;
         letter-spacing: -0.02em;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
       .hero p {
-        color: var(--muted);
-        font-size: 1.04rem;
-        line-height: 1.7;
-        margin: 0 0 24px;
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin: 0 0 32px;
       }
 
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 24px;
+        gap: 16px;
+        margin-bottom: 32px;
       }
 
       .btn {
@@ -144,107 +180,143 @@
         justify-content: center;
         gap: 8px;
         border: none;
-        border-radius: 999px;
-        padding: 12px 16px;
+        border-radius: 8px;
+        padding: 14px 28px;
         font-weight: 700;
+        font-size: 0.95rem;
         cursor: pointer;
+        transition: all 0.2s ease;
       }
 
       .btn-primary {
         background: linear-gradient(135deg, var(--accent), var(--accent-2));
         color: white;
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl);
       }
 
       .btn-secondary {
-        background: var(--surface);
+        background: var(--surface-2);
         color: var(--text);
         border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--surface);
+        border-color: var(--accent);
       }
 
       .stats {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 16px;
       }
 
       .stat-card {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 12px 14px;
-        min-width: 120px;
+        border-radius: 12px;
+        padding: 20px 24px;
+        min-width: 140px;
         box-shadow: var(--shadow);
+        transition: all 0.2s ease;
+      }
+
+      .stat-card:hover {
+        border-color: var(--accent);
+        box-shadow: var(--shadow-lg);
       }
 
       .stat-card strong {
         display: block;
-        font-size: 1.1rem;
-        margin-bottom: 4px;
+        font-size: 1.4rem;
+        margin-bottom: 6px;
+        color: var(--accent);
+      }
+
+      .stat-card span {
+        font-size: 0.85rem;
+        color: var(--muted);
       }
 
       .hero-card {
-        background: linear-gradient(135deg, rgba(91, 124, 255, 0.16), rgba(41, 199, 183, 0.16));
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1));
         border: 1px solid var(--border);
-        border-radius: 24px;
-        padding: 22px;
-        box-shadow: var(--shadow);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: var(--shadow-lg);
       }
 
       .mini-window {
         background: var(--surface);
-        border-radius: 18px;
-        padding: 16px;
+        border-radius: 16px;
+        padding: 20px;
         border: 1px solid var(--border);
+        margin-bottom: 16px;
+      }
+
+      .mini-window:last-child {
+        margin-bottom: 0;
       }
 
       .bubble {
         display: inline-block;
-        padding: 10px 12px;
-        border-radius: 999px;
-        margin: 6px 0;
+        padding: 12px 16px;
+        border-radius: 12px;
+        margin: 8px 0;
         font-size: 0.95rem;
       }
 
       .bubble.ai {
-        background: rgba(91, 124, 255, 0.14);
+        background: rgba(79, 70, 229, 0.12);
       }
 
       .bubble.user {
-        background: rgba(41, 199, 183, 0.16);
-        margin-left: 18px;
+        background: rgba(6, 182, 212, 0.12);
+        margin-left: 24px;
       }
 
       section {
-        padding: 18px 0 36px;
+        padding: 60px 0;
+        border-top: 1px solid var(--border);
+      }
+
+      section:first-of-type {
+        border-top: none;
       }
 
       .section-title {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 14px;
+        margin-bottom: 40px;
       }
 
       .section-title h2 {
         margin: 0;
-        font-size: 1.35rem;
+        font-size: 2rem;
+        font-weight: 800;
       }
 
       .pill {
         display: inline-block;
-        padding: 7px 10px;
-        border-radius: 999px;
+        padding: 8px 16px;
+        border-radius: 20px;
         background: var(--surface-2);
         color: var(--accent);
         font-size: 0.85rem;
         font-weight: 700;
+        letter-spacing: 0.5px;
       }
 
       .card-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 24px;
       }
 
       .feature-card,
@@ -252,29 +324,40 @@
       .roadmap-card {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 18px;
+        border-radius: 16px;
+        padding: 28px;
         box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover,
+      .stack-card:hover,
+      .roadmap-card:hover {
+        border-color: var(--accent);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-4px);
       }
 
       .feature-card h3,
       .stack-card h3,
       .roadmap-card h3 {
-        margin: 0 0 8px;
+        margin: 0 0 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
       }
 
       .feature-card p,
       .stack-card p,
       .roadmap-card p {
-        color: var(--muted);
-        line-height: 1.65;
+        color: var(--text-secondary);
+        line-height: 1.7;
         margin: 0;
       }
 
       .demo {
         display: grid;
-        grid-template-columns: 0.95fr 1.05fr;
-        gap: 18px;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
         align-items: start;
       }
 
@@ -283,23 +366,26 @@
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 20px;
-        padding: 16px;
+        padding: 24px;
         box-shadow: var(--shadow);
       }
 
       .chat-log {
-        min-height: 260px;
+        min-height: 320px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        margin-bottom: 12px;
+        gap: 12px;
+        margin-bottom: 16px;
+        max-height: 400px;
+        overflow-y: auto;
       }
 
       .chat-bubble {
-        max-width: 82%;
-        padding: 10px 12px;
+        max-width: 85%;
+        padding: 12px 16px;
         border-radius: 14px;
         line-height: 1.5;
+        word-wrap: break-word;
       }
 
       .chat-bubble.user {
@@ -315,54 +401,78 @@
 
       .composer {
         display: flex;
-        gap: 10px;
+        gap: 12px;
       }
 
       .composer input {
         flex: 1;
         border: 1px solid var(--border);
-        border-radius: 999px;
-        padding: 12px 14px;
+        border-radius: 8px;
+        padding: 14px 16px;
         background: var(--surface-2);
         color: var(--text);
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+      }
+
+      .composer input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
       }
 
       .composer button {
         border: none;
-        border-radius: 999px;
-        padding: 12px 14px;
+        border-radius: 8px;
+        padding: 14px 24px;
         background: linear-gradient(135deg, var(--accent), var(--accent-2));
         color: white;
         cursor: pointer;
+        font-weight: 700;
+        transition: all 0.2s ease;
+      }
+
+      .composer button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
       }
 
       .history-list {
         list-style: none;
         padding: 0;
-        margin: 0 0 12px;
+        margin: 0 0 16px;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
+        max-height: 300px;
+        overflow-y: auto;
       }
 
       .history-list li {
-        padding: 10px 12px;
-        border-radius: 12px;
+        padding: 12px 14px;
+        border-radius: 10px;
         background: var(--surface-2);
-        color: var(--text);
-        line-height: 1.45;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        font-size: 0.9rem;
       }
 
       .upload-box {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        border: 1px dashed var(--border);
-        border-radius: 999px;
-        padding: 10px 12px;
+        border: 2px dashed var(--border);
+        border-radius: 10px;
+        padding: 12px 16px;
         cursor: pointer;
         color: var(--accent);
         font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .upload-box:hover {
+        border-color: var(--accent);
+        background: var(--surface-2);
       }
 
       .upload-box input {
@@ -370,38 +480,77 @@
       }
 
       .upload-status {
-        margin-top: 10px;
-        color: var(--muted);
-        font-size: 0.92rem;
+        margin-top: 12px;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
       }
 
-      /* Utility classes (replace inline styles) */
-      .section-title--compact { margin-bottom: 10px; }
-      .section-title--spaced { margin-top: 14px; }
-      .mt-12 { margin-top: 12px; }
-      .p-muted { margin: 8px 0 0; color: var(--muted); }
-      .card-grid--single { grid-template-columns: 1fr; }
+      .section-title--compact {
+        margin-bottom: 20px;
+      }
+
+      .section-title--spaced {
+        margin-top: 20px;
+      }
+
+      .mt-12 {
+        margin-top: 12px;
+      }
+
+      .p-muted {
+        margin: 12px 0 0;
+        color: var(--text-secondary);
+      }
+
+      .card-grid--single {
+        grid-template-columns: 1fr;
+      }
+
       footer {
-        padding: 24px 0 40px;
+        padding: 40px 0;
         color: var(--muted);
         text-align: center;
+        border-top: 1px solid var(--border);
+        font-size: 0.95rem;
       }
 
-      @media (max-width: 900px) {
-        .hero,
-        .demo,
+      @media (max-width: 1024px) {
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          padding: 60px 0 40px;
+        }
+
         .card-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .demo {
           grid-template-columns: 1fr;
         }
       }
 
-      @media (max-width: 640px) {
+      @media (max-width: 768px) {
         .nav-links {
           display: none;
         }
 
         .hero {
-          padding-top: 36px;
+          padding-top: 40px;
+        }
+
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-title {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+
+        section {
+          padding: 40px 0;
         }
       }
     </style>
@@ -415,8 +564,9 @@
         </a>
         <div class="nav-links">
           <a href="#features">Features</a>
-          <a href="#demo">Live Demo</a>
-          <button class="nav-btn" id="themeToggle" type="button">🌙 Dark Mode</button>
+          <a href="#demo">Demo</a>
+          <a href="#stack">Stack</a>
+          <button class="nav-btn" id="themeToggle" type="button">🌙 Dark</button>
         </div>
       </div>
     </header>
@@ -424,43 +574,41 @@
     <main class="container">
       <section class="hero">
         <div>
-          <span class="pill">General AI + Study Companion</span>
-          <h1>Ask anything. Learn smarter. Prepare better.</h1>
+          <span class="pill">✨ AI + Study Companion</span>
+          <h1>Learn Smarter.<br>Answer Faster.</h1>
           <p>
-            Thinkora AI blends a powerful general assistant with a student-focused study partner.
-            It can explain concepts, create notes, solve quizzes, answer NCERT-style questions,
-            summarize PDFs, and support voice-first learning.
+            Thinkora AI combines a powerful general assistant with student-focused features. Explain concepts, generate notes, solve quizzes, answer NCERT questions, and prepare for exams—all in one unified platform.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#demo">Try the Demo</a>
+            <a class="btn btn-primary" href="#demo">Try Demo →</a>
             <a class="btn btn-secondary" href="#features">Explore Features</a>
           </div>
           <div class="stats">
             <div class="stat-card">
               <strong>24/7</strong>
-              <span>AI help</span>
+              <span>AI Support</span>
             </div>
             <div class="stat-card">
-              <strong>10+</strong>
-              <span>Smart tools</span>
+              <strong>15+</strong>
+              <span>Features</span>
             </div>
             <div class="stat-card">
-              <strong>Eng / Hin</strong>
-              <span>Multi-language</span>
+              <strong>2 Languages</strong>
+              <span>Eng & Hindi</span>
             </div>
           </div>
         </div>
 
-        <div class="hero-card" aria-label="App preview">
+        <div class="hero-card">
           <div class="mini-window">
-            <div class="bubble ai">Explain photosynthesis simply.</div>
-            <div class="bubble user">Sure — like a plant making food from sunlight.</div>
-            <div class="bubble ai">I can also create a quiz, notes, or flashcards for you.</div>
+            <div class="bubble ai">📚 Explain photosynthesis in simple terms</div>
+            <div class="bubble user">🤖 Sure! It's how plants convert sunlight into food and oxygen...</div>
+            <div class="bubble ai">📝 I can create notes, quizzes, or flashcards for this topic too!</div>
           </div>
-          <div class="mini-window mt-12">
-            <strong>Built for students</strong>
+          <div class="mini-window">
+            <strong>Perfect for Students</strong>
             <p class="p-muted">
-              NCERT help, assignments, math solutions, revision plans, and exam prep in one place.
+              NCERT solutions, assignments, exam prep, competitive exams, and real-time help across all subjects.
             </p>
           </div>
         </div>
@@ -468,115 +616,117 @@
 
       <section id="features">
         <div class="section-title">
-          <h2>Core features</h2>
-          <span class="pill">General AI</span>
+          <h2>Core Features</h2>
+          <span class="pill">Three Pillars</span>
         </div>
         <div class="card-grid">
           <article class="feature-card">
-            <h3>General AI</h3>
-            <p>Ask anything, explain concepts, summarize text, translate languages, write emails and essays, and solve programming issues.</p>
+            <h3>🧠 General AI</h3>
+            <p>Ask anything: explain concepts, summarize text, translate languages, write essays, debug code, and get instant answers.</p>
           </article>
           <article class="feature-card">
-            <h3>Study Assistant</h3>
-            <p>Get NCERT-style answers, step-by-step topic explanations, notes, quizzes, MCQs, math help, and assignment support.</p>
+            <h3>📚 Study Assistant</h3>
+            <p>NCERT solutions, step-by-step explanations, quiz generation, MCQs, math help, assignment support, and exam prep.</p>
           </article>
           <article class="feature-card">
-            <h3>Smart Learning</h3>
-            <p>Build flashcards, switch into exam-prep mode, and learn with voice input, voice output, and image-based questions.</p>
+            <h3>⚡ Smart Tools</h3>
+            <p>Voice input/output, image-based questions, PDF uploads, flashcards, chat history, dark mode, and multi-language support.</p>
           </article>
         </div>
       </section>
 
       <section>
         <div class="section-title">
-          <h2>Smart features</h2>
-          <span class="pill">Voice + vision</span>
+          <h2>Smart Capabilities</h2>
+          <span class="pill">Voice • Vision • Text</span>
         </div>
         <div class="card-grid">
           <article class="feature-card">
-            <h3>Voice input and output</h3>
-            <p>Speak naturally and hear answers back in a conversational way for hands-free studying.</p>
+            <h3>🎙️ Voice Support</h3>
+            <p>Speak naturally and hear conversational responses. Perfect for hands-free studying and accessibility.</p>
           </article>
           <article class="feature-card">
-            <h3>Image-based questions</h3>
-            <p>Upload a photo and let the assistant help solve questions from the image or explain the scene.</p>
+            <h3>📸 Image Recognition</h3>
+            <p>Upload photos of problems or scenes. Get instant explanations and solutions directly from images.</p>
           </article>
           <article class="feature-card">
-            <h3>PDF upload and chat</h3>
-            <p>Summarize long documents, extract key points, and ask follow-up questions about uploaded PDFs.</p>
+            <h3>📄 PDF Intelligence</h3>
+            <p>Upload PDFs, textbooks, or notes. Summarize content and ask follow-up questions for deeper understanding.</p>
           </article>
         </div>
       </section>
 
       <section id="demo" class="demo">
-        <div class="chat-panel">
-          <div class="section-title section-title--compact">
-            <h2>Try a quick demo</h2>
-            <span class="pill">Live chat</span>
-          </div>
-          <div class="chat-log" id="chatLog">
-            <div class="chat-bubble bot">Hello! I can help with study questions, notes, summaries, coding help, and up-to-date India GK topics like leaders, rates, and national symbols.</div>
-          </div>
-          <div class="composer">
-            <input id="chatInput" type="text" placeholder="Ask: who is the President of India, what is the repo rate, or help with a quiz" />
-            <button id="sendBtn" type="button">Send</button>
+        <div>
+          <div class="chat-panel">
+            <div class="section-title section-title--compact">
+              <h2>Live Demo</h2>
+              <span class="pill">Interactive</span>
+            </div>
+            <div class="chat-log" id="chatLog">
+              <div class="chat-bubble bot">👋 Hello! Ask me about science, Indian GK, coding, math, or exam prep. Try: "Who is the President of India?" or "What is photosynthesis?"</div>
+            </div>
+            <div class="composer">
+              <input id="chatInput" type="text" placeholder="Ask anything..." />
+              <button id="sendBtn">Send</button>
+            </div>
           </div>
         </div>
 
         <div>
           <div class="history-panel">
-              <div class="section-title section-title--compact">
-              <h2>Recent study history</h2>
-              <span class="pill">Saved locally</span>
+            <div class="section-title section-title--compact">
+              <h2>Study History</h2>
+              <span class="pill">Saved</span>
             </div>
             <ul class="history-list" id="historyList">
-              <li>Start a chat and your recent study activity will appear here.</li>
+              <li>Your recent study activity will appear here.</li>
             </ul>
             <label class="upload-box" for="uploadInput">
               <input id="uploadInput" type="file" accept=".pdf,.txt,.doc,.docx" />
-              <span>📄 Upload a document</span>
+              <span>📄 Upload Document</span>
             </label>
-            <div class="upload-status" id="uploadStatus">Upload notes, PDFs, or study material for later review.</div>
+            <div class="upload-status" id="uploadStatus">Upload PDFs or notes for analysis and Q&A</div>
           </div>
 
           <div class="section-title section-title--spaced">
-            <h2>Planned future upgrades</h2>
-            <span class="pill">Roadmap</span>
+            <h2>Roadmap</h2>
+            <span class="pill">Coming Soon</span>
           </div>
           <div class="card-grid card-grid--single">
             <article class="roadmap-card">
-              <h3>Personalized study plans</h3>
-              <p>Create custom revision paths based on a student’s pace, subjects, and weak areas.</p>
+              <h3>🎯 Personalized Plans</h3>
+              <p>AI-driven study schedules tailored to your pace, weaknesses, and exam goals.</p>
             </article>
             <article class="roadmap-card">
-              <h3>AI tutor for every subject</h3>
-              <p>Offer subject-specific tutoring for math, science, English, coding, and more.</p>
+              <h3>👨‍🏫 Subject Tutors</h3>
+              <p>Specialized AI tutors for math, science, English, coding, and competitive exams.</p>
             </article>
             <article class="roadmap-card">
-              <h3>Performance analytics</h3>
-              <p>Track quiz scores, revision consistency, and improvement areas with friendly dashboards.</p>
+              <h3>📊 Performance Analytics</h3>
+              <p>Track progress, quiz scores, weak areas, and get insights to improve faster.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section>
+      <section id="stack">
         <div class="section-title">
-          <h2>Recommended tech stack</h2>
-          <span class="pill">Modern build</span>
+          <h2>Tech Stack</h2>
+          <span class="pill">Modern & Scalable</span>
         </div>
         <div class="card-grid">
           <article class="stack-card">
-            <h3>Frontend</h3>
-            <p>React + Tailwind CSS for a smooth, responsive experience with a modern UI.</p>
+            <h3>🎨 Frontend</h3>
+            <p>Clean HTML5, modern CSS3 with gradient effects, responsive design for all devices.</p>
           </article>
           <article class="stack-card">
-            <h3>Backend</h3>
-            <p>Python + FastAPI for fast APIs, AI integrations, and clean student-focused services.</p>
+            <h3>⚙️ Backend</h3>
+            <p>Python with custom HTTP server, real-time streaming, file uploads, and SQLite persistence.</p>
           </article>
           <article class="stack-card">
-            <h3>AI & data</h3>
-            <p>OpenAI GPT or Google Gemini, PostgreSQL, JWT/Firebase auth, and Cloudinary storage.</p>
+            <h3>🤖 AI Models</h3>
+            <p>OpenAI GPT-4o-mini or Google Gemini with fallback knowledge base for instant responses.</p>
           </article>
         </div>
       </section>
@@ -584,7 +734,7 @@
 
     <footer>
       <div class="container">
-        Thinkora AI — built for curious minds, busy students, and AI-powered learning.
+        ✨ Thinkora AI — Built for curious minds, busy students, and AI-powered learning. © 2026
       </div>
     </footer>
 
@@ -595,14 +745,14 @@
       const savedTheme = localStorage.getItem('thinkora-theme');
       if (savedTheme === 'dark') {
         body.classList.add('dark');
-        themeToggle.textContent = '☀️ Light Mode';
+        themeToggle.textContent = '☀️ Light';
       }
 
       themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark');
         const isDark = body.classList.contains('dark');
         localStorage.setItem('thinkora-theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        themeToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
       });
 
       const chatLog = document.getElementById('chatLog');
@@ -633,7 +783,7 @@
           }
           items.slice(-6).forEach((item) => {
             const li = document.createElement('li');
-            li.textContent = `${item.role === 'assistant' ? 'AI' : item.role === 'upload' ? 'Upload' : 'You'}: ${item.message}`;
+            li.textContent = `${item.role === 'assistant' ? 'AI' : item.role === 'upload' ? '📄' : 'You'}: ${item.message.substring(0, 50)}...`;
             historyList.appendChild(li);
           });
         } catch (error) {
@@ -644,17 +794,17 @@
       async function uploadDocument() {
         const file = uploadInput.files[0];
         if (!file) return;
-        uploadStatus.textContent = 'Uploading document...';
+        uploadStatus.textContent = '⏳ Uploading...';
         const formData = new FormData();
         formData.append('file', file);
         try {
           const response = await fetch('/api/upload', { method: 'POST', body: formData });
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || 'Upload failed');
-          uploadStatus.textContent = data.summary;
+          uploadStatus.textContent = '✅ ' + data.summary;
           await loadHistory();
         } catch (error) {
-          uploadStatus.textContent = 'Upload failed. Please try again.';
+          uploadStatus.textContent = '❌ Upload failed. Try again.';
         }
       }
 
@@ -667,7 +817,7 @@
 
         const bubble = document.createElement('div');
         bubble.className = 'chat-bubble bot';
-        bubble.textContent = 'Thinking...';
+        bubble.textContent = '⏳ Thinking...';
         chatLog.appendChild(bubble);
         chatLog.scrollTop = chatLog.scrollHeight;
 
@@ -711,11 +861,11 @@
           }
 
           if (!text.trim()) {
-            bubble.textContent = 'The assistant did not return any text.';
+            bubble.textContent = 'No response received.';
           }
           await loadHistory();
         } catch (error) {
-          bubble.textContent = 'The smart backend is not running yet. Start it with python3 app.py.';
+          bubble.textContent = '⚠️ Backend not running. Start with: python3 app.py';
         }
       }
 
