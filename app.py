@@ -15,6 +15,7 @@ import requests
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 HTML_FILE = os.path.join(ROOT_DIR, "thinkora.html")
+DASHBOARD_FILE = os.path.join(ROOT_DIR, "dashboard.html")
 DB_PATH = os.path.join(ROOT_DIR, "study_history.db")
 UPLOAD_DIR = os.path.join(ROOT_DIR, "uploads")
 KNOWLEDGE_PATH = os.path.join(ROOT_DIR, "knowledge.json")
@@ -174,6 +175,9 @@ class Handler(BaseHTTPRequestHandler):
             return
         if parsed.path in ["/", "/thinkora.html"]:
             self._serve_file(HTML_FILE)
+            return
+        if parsed.path == "/dashboard.html":
+            self._serve_file(DASHBOARD_FILE)
             return
         self._send_json(404, {"error": "not found"})
 
